@@ -8,9 +8,9 @@ def load_google_sheets():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 
     # 🔐 Lecture du credentials depuis les secrets
-    service_account_info = json.loads(st.secrets["gcp_service_account"])
+    
     creds = ServiceAccountCredentials.from_json_keyfile_dict(service_account_info, scope)
-
+    service_account_info = st.secrets["gcp_service_account"]
     client = gspread.authorize(creds)
 
     SPREADSHEET_ID = "1s0lgJ_JX5Zt2UvFAqrU_GPeO_Zibx0mX3zwuSm4--jc"
