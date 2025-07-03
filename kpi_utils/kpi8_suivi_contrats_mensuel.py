@@ -32,3 +32,7 @@ def kpi8_suivi_contrats_mensuel(df_arrivees):
         counts = snapshot["Type de contrat"].value_counts().to_dict()
         counts["Mois"] = date.strftime("%Y-%m")
         result.append(counts)
+
+    df_result = pd.DataFrame(result).fillna(0)
+    cols = ["Mois"] + sorted([col for col in df_result.columns if col != "Mois"])
+    return df_result[cols].astype({col: int for col in df_result.columns if col != "Mois"})
